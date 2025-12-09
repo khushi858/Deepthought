@@ -29,10 +29,10 @@ The application showcases a content management interface for an EdTech platform,
 
 ## 🎥 Demo
 
-![Application Preview](screenshot.png)
+![Application Preview](screenshot.png.png)
 
-**Live Demo**: [View Live Application](#)  
-**GitHub Repository**: [Your Repo Link](#)
+**Live Demo**: [View Live Application](https://khushi858.github.io/Deepthought/)  
+**GitHub Repository**: [Your Repo Link](https://github.com/khushi858/Deepthought.git)
 
 ---
 
