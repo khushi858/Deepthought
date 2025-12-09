@@ -338,3 +338,32 @@ renderContent(contentData);
 - **Smooth Transitions**: Professional polish
 
 ---
+
+## 👨‍💻 Author
+
+**Your Name**  
+Frontend Developer | DeepThought Intern Candidate
+
+- 📧 Email: khushiupadhyay6829@gmail.com
+- 🐙 GitHub: [Your Username](https://github.com/khushi858/)
+
+---
+
+## 📄 License
+
+This project is created as part of the DeepThought internship application process.
+
+---
+
+## 🙏 Acknowledgments
+
+- DeepThought team for the opportunity
+- Assignment guidelines for clear requirements
+- Modern web development community for inspiration
+
+---
+
+### ⭐ If you found this helpful, please star the repository!
+
+**Last Updated**: December 2024  
+**Version**: 1.0.0
