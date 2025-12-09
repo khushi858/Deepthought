@@ -215,7 +215,7 @@ The application showcases a content management interface for an EdTech platform,
 
 1. **Clone the Repository**
 ```bash
-git clone https://github.com/yourusername/deepthought-frontend-assignment.git
+git clone https://github.com/khushi858/Deepthought.git
 cd Deepthought
 ```
 
