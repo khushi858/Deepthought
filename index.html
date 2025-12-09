@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepThought - Frontend Assignment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .controls input,
+        .controls select,
+        .controls button {
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            font-size: 1em;
+        }
+
+        .controls input,
+        .controls select {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .controls button {
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .controls button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            animation: fadeIn 0.5s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .card-title {
+            color: #667eea;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .card-badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .card-content {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .card-actions button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #555;
+        }
+
+        .btn-primary:hover {
+            background: #764ba2;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .empty-state h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .controls input,
+            .controls select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 DeepThought EdTech Platform</h1>
+            <p class="subtitle">Frontend Development Assignment - Dynamic Content Showcase</p>
+        </header>
+
+        <div class="stats" id="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalItems">0</div>
+                <div class="stat-label">Total Items</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="activeItems">0</div>
+                <div class="stat-label">Active</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completedItems">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Search items...">
+            <select id="filterSelect">
+                <option value="all">All Categories</option>
+                <option value="learning">Learning</option>
+                <option value="project">Project</option>
+                <option value="task">Task</option>
+            </select>
+            <select id="statusFilter">
+                <option value="all">All Status</option>
+                <option value="active">Active</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+            </select>
+            <button onclick="addNewItem()">+ Add New Item</button>
+        </div>
+
+        <div class="grid" id="contentGrid"></div>
+
+        <footer>
+            <p>Created with ❤️ for DeepThought Frontend Assignment</p>
+            <p>Tech Stack: HTML, CSS, Vanilla JavaScript</p>
+        </footer>
+    </div>
+
+    <script>
+        // Sample JSON data structure
+        let contentData = [
+            {
+                id: 1,
+                title: "Understanding Deep Learning",
+                category: "learning",
+                status: "active",
+                description: "Explore the fundamentals of neural networks and deep learning algorithms used in modern AI applications.",
+                date: "2024-12-01",
+                priority: "high"
+            },
+            {
+                id: 2,
+                title: "React Native Mobile App",
+                category: "project",
+                status: "active",
+                description: "Building a cross-platform mobile application using React Native for iOS and Android.",
+                date: "2024-12-05",
+                priority: "medium"
+            },
+            {
+                id: 3,
+                title: "MongoDB Database Design",
+                category: "task",
+                status: "completed",
+                description: "Design and implement scalable database schemas for the EdTech platform using MongoDB.",
+                date: "2024-11-28",
+                priority: "high"
+            },
+            {
+                id: 4,
+                title: "Node.js Backend API",
+                category: "project",
+                status: "active",
+                description: "Develop RESTful APIs using Node.js and Express framework for seamless data communication.",
+                date: "2024-12-03",
+                priority: "high"
+            },
+            {
+                id: 5,
+                title: "Kafka Stream Processing",
+                category: "learning",
+                status: "pending",
+                description: "Learn real-time data streaming and processing using Apache Kafka for distributed systems.",
+                date: "2024-12-08",
+                priority: "medium"
+            },
+            {
+                id: 6,
+                title: "UI/UX Design Review",
+                category: "task",
+                status: "completed",
+                description: "Review and enhance the user interface design based on psychological learning models.",
+                date: "2024-11-25",
+                priority: "low"
+            }
+        ];
+
+        // Render content cards
+        function renderContent(data) {
+            const grid = document.getElementById('contentGrid');
+            
+            if (data.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <h3>No items found</h3>
+                        <p>Try adjusting your search or filters</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = data.map(item => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">${item.title}</div>
+                        <div class="card-badge">${item.category}</div>
+                    </div>
+                    <div class="card-content">
+                        ${item.description}
+                    </div>
+                    <div class="card-meta">
+                        <span>📅 ${item.date}</span>
+                        <span style="color: ${getStatusColor(item.status)}">
+                            ${item.status.toUpperCase()}
+                        </span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-primary" onclick="viewDetails(${item.id})">
+                            View Details
+                        </button>
+                        <button class="btn-secondary" onclick="toggleStatus(${item.id})">
+                            Toggle Status
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update statistics
+        function updateStats() {
+            const total = contentData.length;
+            const active = contentData.filter(item => item.status === 'active').length;
+            const completed = contentData.filter(item => item.status === 'completed').length;
+
+            document.getElementById('totalItems').textContent = total;
+            document.getElementById('activeItems').textContent = active;
+            document.getElementById('completedItems').textContent = completed;
+        }
+
+        // Filter and search functionality
+        function filterContent() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const categoryFilter = document.getElementById('filterSelect').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+
+            let filtered = contentData;
+
+            if (searchTerm) {
+                filtered = filtered.filter(item => 
+                    item.title.toLowerCase().includes(searchTerm) ||
+                    item.description.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            if (categoryFilter !== 'all') {
+                filtered = filtered.filter(item => item.category === categoryFilter);
+            }
+
+            if (statusFilter !== 'all') {
+                filtered = filtered.filter(item => item.status === statusFilter);
+            }
+
+            renderContent(filtered);
+        }
+
+        // Helper functions
+        function getStatusColor(status) {
+            const colors = {
+                active: '#667eea',
+                completed: '#4caf50',
+                pending: '#ff9800'
+            };
+            return colors[status] || '#999';
+        }
+
+        function viewDetails(id) {
+            const item = contentData.find(i => i.id === id);
+            alert(`Item Details:\n\nTitle: ${item.title}\nCategory: ${item.category}\nStatus: ${item.status}\nDescription: ${item.description}\nDate: ${item.date}\nPriority: ${item.priority}`);
+        }
+
+        function toggleStatus(id) {
+            const item = contentData.find(i => i.id === id);
+            const statuses = ['active', 'completed', 'pending'];
+            const currentIndex = statuses.indexOf(item.status);
+            item.status = statuses[(currentIndex + 1) % statuses.length];
+            
+            updateStats();
+            filterContent();
+        }
+
+        function addNewItem() {
+            const newId = Math.max(...contentData.map(i => i.id)) + 1;
+            const newItem = {
+                id: newId,
+                title: `New Item ${newId}`,
+                category: 'task',
+                status: 'pending',
+                description: 'This is a newly added item. Edit to customize the content.',
+                date: new Date().toISOString().split('T')[0],
+                priority: 'medium'
+            };
+            
+            contentData.unshift(newItem);
+            updateStats();
+            filterContent();
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', filterContent);
+        document.getElementById('filterSelect').addEventListener('change', filterContent);
+        document.getElementById('statusFilter').addEventListener('change', filterContent);
+
+        // Initialize
+        updateStats();
+        renderContent(contentData);
+    </script>
+</body>
+</html>
